@@ -2,8 +2,8 @@ const errorHandler = (err, req, res, next) => {
 
     console.error(err);
 
-    const statusCode = err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
+    let statusCode = err.statusCode || err.status || 500;
+    let message = err.message || "Internal Server Error";
 
     // Mongoose bad ObjectId
     if (err.name === "CastError") {
@@ -13,7 +13,7 @@ const errorHandler = (err, req, res, next) => {
 
     // Duplicate key error
     if (err.code === 11000) {
-        statusCode = 400;
+        statusCode = 409;
         message = "Duplicate field value";
     }
 

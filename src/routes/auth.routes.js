@@ -2,8 +2,6 @@ import express from "express";
 import {
   signupValidator,
   loginValidator,
-  emailValidator,
-  tokenValidator,
 } from "../validators/auth.validator.js";
 import validateMiddleware from "../middlewares/validate.middleware.js";
 import {

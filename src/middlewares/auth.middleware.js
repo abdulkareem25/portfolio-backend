@@ -1,22 +1,22 @@
 import jwt from "jsonwebtoken";
-import User from "../models/user.model.js";
+import User from "../models/User.model.js";
 import config from "../config/config.js";
 
 const authMiddleware = async (req, res, next) => {
   try {
-    let token, error;
+    const authHeader = req.headers.authorization;
 
-    token = req.cookies.token;
-
-    if (!token) {
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       error = new Error("Unauthorized - No token provided");
       error.statusCode = 401;
       throw error;
     }
 
+    token = authHeader.split(" ")[1];
+
     const decoded = jwt.verify(token, config.JWT_SECRET);
 
-    const user = await User.findById(decoded.id).select("-password");
+    const user = await User.findById(decoded.userId).select("-password");
 
     if (!user) {
       error = new Error("Unauthorized - User not found");

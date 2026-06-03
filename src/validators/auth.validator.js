@@ -1,5 +1,4 @@
-import e from "express";
-import { body, query } from "express-validator";
+import { body } from "express-validator";
 
 export const signupValidator = [
   body("fullName")
@@ -31,8 +30,8 @@ export const signupValidator = [
 
   body("role")
     .optional()
-    .isIn(["buyer", "seller"])
-    .withMessage("Role must be either 'buyer' or 'seller'"),
+    .isIn(["admin", "user"])
+    .withMessage("Role must be either 'admin' or 'user'"),
 ];
 
 export const loginValidator = [
