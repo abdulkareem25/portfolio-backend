@@ -4,6 +4,8 @@ import config from "../config/config.js";
 
 const authMiddleware = async (req, res, next) => {
   try {
+    let error, token;
+    
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {

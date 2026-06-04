@@ -12,7 +12,7 @@ const client = new ImageKit({
  * @returns {Promise<object>} ImageKit upload result (includes .url)
  */
 const uploadImage = async (buffer, originalName = "image.jpg") => {
-    const result = await client.upload({
+    const result = await client.files.upload({
         file: buffer.toString("base64"),
         fileName: `${Date.now()}-${originalName}`,
         folder: "projects",
